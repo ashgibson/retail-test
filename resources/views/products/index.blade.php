@@ -14,6 +14,8 @@
             <th>Product Description</th>
             <th>Qty in Stock</th>
             <th>Qty on Order</th>
+            <th>Qty on Order</th>
+            <th>Qty on Order</th>
             <th>Buy Price</th>
             <th>MSRP</th>
         </tr>
@@ -28,6 +30,8 @@
                 <td>{{$product->productVendor}}</td>
                 <td>{{$product->productDescription}}</td>
                 <td>{{$product->quantityInStock}}</td>
+                <td>{{$product->quantityOrdered}}</td>
+                <td>{{$product->orders->sum('pivot.quantityOrdered')}}</td>
                 @if(($product->orders()->sum('quantityOrdered')) > ($product->quantityInStock))
                     <td class="text-danger"><strong>{{$product->orders()->sum('quantityOrdered')}}</strong></td>
                 @else

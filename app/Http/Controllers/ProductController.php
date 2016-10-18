@@ -14,6 +14,12 @@ class ProductController extends Controller
     {
         $products = Product::paginate(20);
 
+        $products->each(function($item, $key) {
+
+            $item->quantityOrdered = $item->orders->sum('pivot.quantityOrdered');
+
+        });
+
         return view('products.index', ['products' => $products]);
 
     }
